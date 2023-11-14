@@ -12,16 +12,20 @@ namespace MJU23v_D10_inl_sveng {
             if (args.Length == 1) {
                 filePath = @"dict\" + args[0];
             }
-            // FIXME: Try/Catch
-            using(StreamReader sr = new StreamReader(filePath)) {
-                Program.dictionary = new List<SweEngGloss>(); // Empty it!
-                string line = sr.ReadLine();
-                while(line != null) {
-                    SweEngGloss gloss = new SweEngGloss(line);
-                    Program.dictionary.Add(gloss);
-                    line = sr.ReadLine();
+            try {
+                using (StreamReader sr = new StreamReader(filePath)) {
+                    Program.dictionary = new List<SweEngGloss>(); // Empty it!
+                    string ?line = sr.ReadLine();
+                    while (line != null) {
+                        SweEngGloss gloss = new SweEngGloss(line);
+                        Program.dictionary.Add(gloss);
+                        line = sr.ReadLine();
+                    }
                 }
+            } catch (Exception exception) {
+                Console.WriteLine(exception.Message);
             }
+            
         }
 
         public static void ListCommand(string[] args) {
