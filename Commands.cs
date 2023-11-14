@@ -78,5 +78,25 @@ namespace MJU23v_D10_inl_sveng {
             }
         }
 
+        public static void TranslateCommand(string[] args) {
+            if (args.Length == 1) {
+                foreach (SweEngGloss gloss in Program.dictionary) {
+                    if (gloss.word_swe == args[0])
+                        Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
+                    if (gloss.word_eng == args[0])
+                        Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
+                }
+            } else if (args.Length == 0) {
+                Console.WriteLine("Write word to be translated: ");
+                string s = Console.ReadLine();
+                foreach (SweEngGloss gloss in Program.dictionary) {
+                    if (gloss.word_swe == s)
+                        Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
+                    if (gloss.word_eng == s)
+                        Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
+                }
+            }
+        }
+
     }
 }
