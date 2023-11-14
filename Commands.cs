@@ -83,5 +83,20 @@ namespace MJU23v_D10_inl_sveng {
             }
         }
 
+        public static void HelpCommand(string[] args) {
+            Console.WriteLine(
+                "Commands:\n" +
+                "load - Load default file.\n" +
+                "load [filename] - Load file from dict/\n" +
+                "list - Show all translations.\n" +
+                "new - Add a new translation to the dictionary.\n" +
+                "new [swedish word] [english word]\n" +
+                "delete - Delete set of words from the dictionary.\n" +
+                "delete [swedish word] [english word]\n" +
+                "translate - Translate a word+\n" +
+                "translate [word]"
+                );
+        }
+
     }
 }

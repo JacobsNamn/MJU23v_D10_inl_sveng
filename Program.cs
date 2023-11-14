@@ -40,6 +40,10 @@
                 {
                     Commands.TranslateCommand(args);
                 }
+                else if(command == "help")
+                 {
+                    Commands.HelpCommand(args);
+                }
                 else
                 {
                     Console.WriteLine($"Unknown command: '{command}'");
