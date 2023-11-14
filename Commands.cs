@@ -34,10 +34,24 @@ namespace MJU23v_D10_inl_sveng {
             }
         }
 
-        internal static void ListCommand(string[] args) {
+        public static void ListCommand(string[] args) {
             foreach (SweEngGloss gloss in Program.dictionary) {
                 Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
             }
         }
+
+        public static void NewCommand(string[] args) {
+            if (args.Length == 2) {
+                Program.dictionary.Add(new SweEngGloss(args[0], args[1]));
+            } else if (args.Length == 0) {
+                Console.WriteLine("Write word in Swedish: ");
+                string s = Console.ReadLine();
+                Console.Write("Write word in English: ");
+                string e = Console.ReadLine();
+                Program.dictionary.Add(new SweEngGloss(s, e));
+            }
+            // TODO: Lägg till fall där argumenten är 2.
+        }
+
     }
 }

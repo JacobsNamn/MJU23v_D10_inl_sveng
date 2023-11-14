@@ -30,19 +30,7 @@
                 }
                 else if (command == "new")
                 {
-                    if (args.Length == 2)
-                    {
-                        dictionary.Add(new SweEngGloss(args[0], args[1]));
-                    }
-                    else if(args.Length == 0)
-                    {
-                        Console.WriteLine("Write word in Swedish: ");
-                        string s = Console.ReadLine();
-                        Console.Write("Write word in English: ");
-                        string e = Console.ReadLine();
-                        dictionary.Add(new SweEngGloss(s, e));
-                    }
-                    // TODO: Lägg till fall där argumenten är 2.
+                    Commands.NewCommand(args);
                 }
                 else if (command == "delete")
                 {
