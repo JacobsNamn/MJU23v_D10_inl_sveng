@@ -53,5 +53,30 @@ namespace MJU23v_D10_inl_sveng {
             // TODO: Lägg till fall där argumenten är 2.
         }
 
+        public static void DeleteCommand(string[] args) {
+            if (args.Length == 2) {
+                int index = -1;
+                for (int i = 0; i < Program.dictionary.Count; i++) { // TODO: Förkorta.
+                    SweEngGloss gloss = Program.dictionary[i];
+                    if (gloss.word_swe == args[0] && gloss.word_eng == args[1])
+                        index = i;
+                }
+                Program.dictionary.RemoveAt(index);
+            } else if (args.Length == 0) {
+                Console.WriteLine("Write word in Swedish: ");
+                string s = Console.ReadLine();
+                Console.Write("Write word in English: ");
+                string e = Console.ReadLine();
+                int index = -1;
+                for (int i = 0; i < Program.dictionary.Count; i++) // TODO: Förkorta.
+                {
+                    SweEngGloss gloss = Program.dictionary[i];
+                    if (gloss.word_swe == s && gloss.word_eng == e)
+                        index = i;
+                }
+                Program.dictionary.RemoveAt(index); // FIXME: Checka om out-of-bounds först.
+            }
+        }
+
     }
 }
