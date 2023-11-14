@@ -33,5 +33,11 @@ namespace MJU23v_D10_inl_sveng {
                 }
             }
         }
+
+        internal static void ListCommand(string[] args) {
+            foreach (SweEngGloss gloss in Program.dictionary) {
+                Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
+            }
+        }
     }
 }

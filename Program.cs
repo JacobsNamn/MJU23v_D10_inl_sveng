@@ -26,10 +26,7 @@
                 }
                 else if (command == "list")
                 {
-                    foreach(SweEngGloss gloss in dictionary)
-                    {
-                        Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
-                    }
+                    Commands.ListCommand(args);
                 }
                 else if (command == "new")
                 {
