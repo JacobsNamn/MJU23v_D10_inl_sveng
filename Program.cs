@@ -1,8 +1,8 @@
-﻿namespace MJU23v_D10_inl_sveng
+﻿﻿namespace MJU23v_D10_inl_sveng
 {
     internal class Program
     {
-        static List<SweEngGloss> dictionary;
+        static List<SweEngGloss> dictionary = new List<SweEngGloss>();
         class SweEngGloss
         {
             public string word_swe, word_eng;
@@ -18,22 +18,25 @@
         }
         static void Main(string[] args)
         {
-            string defaultFile = "..\\..\\..\\dict\\sweeng.lis";
+            string defaultFile = @"dict\sweeng.lis";
             Console.WriteLine("Welcome to the dictionary app!");
             do
             {
                 Console.Write("> ");
-                string[] argument = Console.ReadLine().Split();
-                string command = argument[0];
+                string[] argument = Console.ReadLine().Split(); // TODO: Nämn om till 'arguments' och ta bort första indexet.
+                string command = argument[0]; // TODO: Tillåt små bokstäver.
                 if (command == "quit")
                 {
                     Console.WriteLine("Goodbye!");
+                    break;
                 }
                 else if (command == "load")
                 {
-                    if(argument.Length == 2)
+                    // TODO: Innehållet av båda if:arna kan kombineras.
+                    if (argument.Length == 2)
                     {
-                        using (StreamReader sr = new StreamReader(argument[1]))
+                        // TODO: Try/catch.
+                        using (StreamReader sr = new StreamReader(@"dict\" + argument[1]))
                         {
                             dictionary = new List<SweEngGloss>(); // Empty it!
                             string line = sr.ReadLine();
@@ -47,6 +50,7 @@
                     }
                     else if(argument.Length == 1)
                     {
+                        // TODO: Try/catch.
                         using (StreamReader sr = new StreamReader(defaultFile))
                         {
                             dictionary = new List<SweEngGloss>(); // Empty it!
@@ -81,13 +85,14 @@
                         string e = Console.ReadLine();
                         dictionary.Add(new SweEngGloss(s, e));
                     }
+                    // TODO: Lägg till fall där argumenten är 2.
                 }
                 else if (command == "delete")
                 {
                     if (argument.Length == 3)
                     {
                         int index = -1;
-                        for (int i = 0; i < dictionary.Count; i++) {
+                        for (int i = 0; i < dictionary.Count; i++) { // TODO: Förkorta.
                             SweEngGloss gloss = dictionary[i];
                             if (gloss.word_swe == argument[1] && gloss.word_eng == argument[2])
                                 index = i;
@@ -101,13 +106,13 @@
                         Console.Write("Write word in English: ");
                         string e = Console.ReadLine();
                         int index = -1;
-                        for (int i = 0; i < dictionary.Count; i++)
+                        for (int i = 0; i < dictionary.Count; i++) // TODO: Förkorta.
                         {
                             SweEngGloss gloss = dictionary[i];
                             if (gloss.word_swe == s && gloss.word_eng == e)
                                 index = i;
                         }
-                        dictionary.RemoveAt(index);
+                        dictionary.RemoveAt(index); // FIXME: Checka om out-of-bounds först.
                     }
                 }
                 else if (command == "translate")
@@ -139,6 +144,7 @@
                 {
                     Console.WriteLine($"Unknown command: '{command}'");
                 }
+                // TODO: Lägg till hjälpkommando.
             }
             while (true);
         }
