@@ -46,27 +46,24 @@ namespace MJU23v_D10_inl_sveng {
         }
 
         public static void DeleteCommand(string[] args) {
-            if (args.Length == 2) {
-                int index = -1;
-                for (int i = 0; i < Program.dictionary.Count; i++) { // TODO: Förkorta.
-                    SweEngGloss gloss = Program.dictionary[i];
-                    if (gloss.word_swe == args[0] && gloss.word_eng == args[1])
-                        index = i;
+            if (Program.dictionary.Count == 0) { Console.WriteLine("Dictionary list is empty."); return; }
+            if (args.Length == 1) { Console.WriteLine("'delete' does not take one argument. Correct usage: delete, delete [swedish word] [english word]"); return; }
+
+            string word_swe, word_eng;
+            if (args.Length > 1) {
+                word_swe = args[0]; word_eng = args[1];
+            } else {
+                word_swe = PrintGet("Write word in Swedish: ");
+                word_eng = PrintGet("Write word in English: ");
+            }
+
+            SweEngGloss[] glossaries = Program.dictionary.Where(g => g.word_swe == word_swe && g.word_eng == word_eng).ToArray();
+            if (glossaries.Length == 0) {
+                Console.WriteLine($"No result \"{word_swe}\" \"{word_eng}\" found.");
+            } else {
+                foreach (SweEngGloss glossary in glossaries) {
+                    Program.dictionary.Remove(glossary);
                 }
-                Program.dictionary.RemoveAt(index);
-            } else if (args.Length == 0) {
-                Console.WriteLine("Write word in Swedish: ");
-                string s = Console.ReadLine();
-                Console.Write("Write word in English: ");
-                string e = Console.ReadLine();
-                int index = -1;
-                for (int i = 0; i < Program.dictionary.Count; i++) // TODO: Förkorta.
-                {
-                    SweEngGloss gloss = Program.dictionary[i];
-                    if (gloss.word_swe == s && gloss.word_eng == e)
-                        index = i;
-                }
-                Program.dictionary.RemoveAt(index); // FIXME: Checka om out-of-bounds först.
             }
         }
 
