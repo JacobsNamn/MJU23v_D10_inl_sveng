@@ -3,19 +3,7 @@
     internal class Program
     {
         static List<SweEngGloss> dictionary = new List<SweEngGloss>();
-        class SweEngGloss
-        {
-            public string word_swe, word_eng;
-            public SweEngGloss(string word_swe, string word_eng)
-            {
-                this.word_swe = word_swe; this.word_eng = word_eng;
-            }
-            public SweEngGloss(string line)
-            {
-                string[] words = line.Split('|');
-                this.word_swe = words[0]; this.word_eng = words[1];
-            }
-        }
+        
         static void Main(string[] program_args)
         {
             string defaultFile = @"dict\sweeng.lis";
