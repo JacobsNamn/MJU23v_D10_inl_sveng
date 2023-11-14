@@ -48,7 +48,6 @@
                 {
                     Console.WriteLine($"Unknown command: '{command}'");
                 }
-                // TODO: Lägg till hjälpkommando.
             }
             while (true);
         }

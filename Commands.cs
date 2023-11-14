@@ -36,7 +36,12 @@ namespace MJU23v_D10_inl_sveng {
 
         private static string PrintGet(string text) {
             Console.Write(text);
-            return Console.ReadLine(); // FIXME: Possible null reference return.
+            string? ret = Console.ReadLine();
+            if (ret != null) {
+                return ret;
+            } else {
+                return String.Empty;
+            }
         }
 
         public static void NewCommand(string[] args) {
