@@ -2,11 +2,12 @@
 {
     internal class Program
     {
-        static List<SweEngGloss> dictionary = new List<SweEngGloss>();
-        
+        public static List<SweEngGloss> dictionary = new List<SweEngGloss>();
+        public static string DefaultFile = @"dict\sweeng.lis";
+
         static void Main(string[] program_args)
         {
-            string defaultFile = @"dict\sweeng.lis";
+            
             Console.WriteLine("Welcome to the dictionary app!");
             do
             {
@@ -21,37 +22,7 @@
                 }
                 else if (command == "load")
                 {
-                    // TODO: Innehållet av båda if:arna kan kombineras.
-                    if (args.Length == 1)
-                    {
-                        // TODO: Try/catch.
-                        using (StreamReader sr = new StreamReader(@"dict\" + args[0]))
-                        {
-                            dictionary = new List<SweEngGloss>(); // Empty it!
-                            string line = sr.ReadLine();
-                            while (line != null)
-                            {
-                                SweEngGloss gloss = new SweEngGloss(line);
-                                dictionary.Add(gloss);
-                                line = sr.ReadLine();
-                            }
-                        }
-                    }
-                    else if(args.Length == 0)
-                    {
-                        // TODO: Try/catch.
-                        using (StreamReader sr = new StreamReader(defaultFile))
-                        {
-                            dictionary = new List<SweEngGloss>(); // Empty it!
-                            string line = sr.ReadLine();
-                            while (line != null)
-                            {
-                                SweEngGloss gloss = new SweEngGloss(line);
-                                dictionary.Add(gloss);
-                                line = sr.ReadLine();
-                            }
-                        }
-                    }
+                    Commands.LoadCommand(args);
                 }
                 else if (command == "list")
                 {
