@@ -1,4 +1,4 @@
-﻿﻿namespace MJU23v_D10_inl_sveng
+﻿namespace MJU23v_D10_inl_sveng
 {
     internal class Program
     {
@@ -16,15 +16,16 @@
                 this.word_swe = words[0]; this.word_eng = words[1];
             }
         }
-        static void Main(string[] args)
+        static void Main(string[] program_args)
         {
             string defaultFile = @"dict\sweeng.lis";
             Console.WriteLine("Welcome to the dictionary app!");
             do
             {
                 Console.Write("> ");
-                string[] argument = Console.ReadLine().Split(); // TODO: Nämn om till 'arguments' och ta bort första indexet.
-                string command = argument[0]; // TODO: Tillåt små bokstäver.
+                string[] arr = Console.ReadLine().Split(" ");
+                string command = arr[0];
+                string[] args = arr.Skip(1).ToArray();
                 if (command == "quit")
                 {
                     Console.WriteLine("Goodbye!");
@@ -33,10 +34,10 @@
                 else if (command == "load")
                 {
                     // TODO: Innehållet av båda if:arna kan kombineras.
-                    if (argument.Length == 2)
+                    if (args.Length == 1)
                     {
                         // TODO: Try/catch.
-                        using (StreamReader sr = new StreamReader(@"dict\" + argument[1]))
+                        using (StreamReader sr = new StreamReader(@"dict\" + args[0]))
                         {
                             dictionary = new List<SweEngGloss>(); // Empty it!
                             string line = sr.ReadLine();
@@ -48,7 +49,7 @@
                             }
                         }
                     }
-                    else if(argument.Length == 1)
+                    else if(args.Length == 0)
                     {
                         // TODO: Try/catch.
                         using (StreamReader sr = new StreamReader(defaultFile))
@@ -73,11 +74,11 @@
                 }
                 else if (command == "new")
                 {
-                    if (argument.Length == 3)
+                    if (args.Length == 2)
                     {
-                        dictionary.Add(new SweEngGloss(argument[1], argument[2]));
+                        dictionary.Add(new SweEngGloss(args[0], args[1]));
                     }
-                    else if(argument.Length == 1)
+                    else if(args.Length == 0)
                     {
                         Console.WriteLine("Write word in Swedish: ");
                         string s = Console.ReadLine();
@@ -89,17 +90,17 @@
                 }
                 else if (command == "delete")
                 {
-                    if (argument.Length == 3)
+                    if (args.Length == 2)
                     {
                         int index = -1;
                         for (int i = 0; i < dictionary.Count; i++) { // TODO: Förkorta.
                             SweEngGloss gloss = dictionary[i];
-                            if (gloss.word_swe == argument[1] && gloss.word_eng == argument[2])
+                            if (gloss.word_swe == args[0] && gloss.word_eng == args[1])
                                 index = i;
                         }
                         dictionary.RemoveAt(index);
                     }
-                    else if (argument.Length == 1)
+                    else if (args.Length == 0)
                     {
                         Console.WriteLine("Write word in Swedish: ");
                         string s = Console.ReadLine();
@@ -117,17 +118,17 @@
                 }
                 else if (command == "translate")
                 {
-                    if (argument.Length == 2)
+                    if (args.Length == 1)
                     {
                         foreach(SweEngGloss gloss in dictionary)
                         {
-                            if (gloss.word_swe == argument[1])
+                            if (gloss.word_swe == args[0])
                                 Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
-                            if (gloss.word_eng == argument[1])
+                            if (gloss.word_eng == args[0])
                                 Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
                         }
                     }
-                    else if (argument.Length == 1)
+                    else if (args.Length == 0)
                     {
                         Console.WriteLine("Write word to be translated: ");
                         string s = Console.ReadLine();
