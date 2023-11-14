@@ -22,6 +22,8 @@ namespace MJU23v_D10_inl_sveng {
                         line = sr.ReadLine();
                     }
                 }
+            } catch (FileNotFoundException exception) {
+                Console.WriteLine(exception.Message);
             } catch (Exception exception) {
                 Console.WriteLine(exception.Message);
             }
