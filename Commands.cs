@@ -30,17 +30,19 @@ namespace MJU23v_D10_inl_sveng {
             }
         }
 
+        private static string PrintGet(string text) {
+            Console.Write(text);
+            return Console.ReadLine(); // FIXME: Possible null reference return.
+        }
+
         public static void NewCommand(string[] args) {
-            if (args.Length == 2) {
+            if (args.Length == 1) { Console.WriteLine("'new' does not take one argument. Correct usage: new, new [swedish word] [english word]"); return; }
+            if (args.Length > 1) {
                 Program.dictionary.Add(new SweEngGloss(args[0], args[1]));
-            } else if (args.Length == 0) {
-                Console.WriteLine("Write word in Swedish: ");
-                string s = Console.ReadLine();
-                Console.Write("Write word in English: ");
-                string e = Console.ReadLine();
-                Program.dictionary.Add(new SweEngGloss(s, e));
+            } else {
+                Program.dictionary.Add(new SweEngGloss(PrintGet("Write word in Swedish: "), PrintGet("Write word in English: ")));
+
             }
-            // TODO: Lägg till fall där argumenten är 2.
         }
 
         public static void DeleteCommand(string[] args) {
